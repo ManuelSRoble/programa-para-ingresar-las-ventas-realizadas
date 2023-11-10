@@ -55,7 +55,7 @@ def baseDeDatos(ventana,paginaPpal): # acepto la ventana como parametro
         def agregarProductoAlaBD(conexion):
             nombre = nombreProducto.get()
             precio = precioProducto.get()
-            if nombre and precio:
+            if nombre and precio and nombre.isalpha() and precio.isdigit():
                 # conexion = conectarse_bd            
                 cursor = conexion.cursor()   #creo un objeto cursor     
                 query = "INSERT INTO tabladventas (nombre, precio) VALUES (%s, %s)"
@@ -65,10 +65,10 @@ def baseDeDatos(ventana,paginaPpal): # acepto la ventana como parametro
                 cursor.close()
                 conexion.close()
                 # mensaje para avisar que se agrego el dato en la bd con foreground verde
-                mensaje.config(text="Producto agregado correctamente.", fg="green")
+                mensaje.config(text="Producto agregado correctamente", fg="green")
             else:
                 # mensaje de error
-                mensaje.config(text="Por favor, ingrese un nombre y un precio.", fg="red")
+                mensaje.config(text="ingrese nombre y precio validos", fg="red")
         # flujo de la ventana de para agregar venta a la bd
         borrarTodo(ventana)
         #etiquetas y campos de entrada
@@ -89,7 +89,7 @@ def baseDeDatos(ventana,paginaPpal): # acepto la ventana como parametro
         boton_agregar.place(x=10, y=135, width=200, height=25)   
         # etiqueta para mostrar mensajes
         mensaje = tk.Label(ventana, text='', fg="black",bg='cyan')
-        mensaje.place(x=10, y=190, width=200, height=15)   
+        mensaje.place(x=10, y=170, width=200, height=15)   
         # boton para volver a la pagina ppal
         botonVolver = tk.Button(ventana,text="volver atras",command=lambda: volver(ventana,paginaPpal))
         botonVolver.place(x=10, y=200, width=200, height=25)   
